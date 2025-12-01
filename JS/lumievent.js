@@ -242,62 +242,115 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Brayand: Aquí más adelante conectaremos el formulario de contacto con WhatsApp o EmailJS.
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            alert('Este formulario se conectará con WhatsApp o EmailJS en la versión final del proyecto.');
-            contactForm.reset();
-        });
-    }
-  // Yineth: Optimización de Formulario de contacto.
-
-const formContacto = document.querySelector('#contacto form');
+    // Yineth: Optimización del Formulario.
+    const formContacto = document.querySelector('#contact-form');
 
 if (formContacto) {
-  formContacto.addEventListener('submit', function (e) {
-    e.preventDefault();
 
-    const nombre = formContacto.querySelector('#nombre')?.value.trim() || '';
-    const correo = formContacto.querySelector('#correo')?.value.trim() || '';
-    const mensaje = formContacto.querySelector('#mensaje')?.value.trim() || '';
+  const campoNombre = formContacto.querySelector('#nombre');
+  const campoCorreo = formContacto.querySelector('#email');
+  const campoMensaje = formContacto.querySelector('#mensaje');
+  
+  // Yineth: Mensaje creado debajo del input email para validación en tiempo real
+  let emailFeedback = document.createElement("small");
+  emailFeedback.style.display = "block";
+  emailFeedback.style.marginTop = "4px";
+  emailFeedback.style.fontSize = "14px";
+  emailFeedback.style.fontWeight = "500";
+  formContacto.querySelector('.campo-email')?.appendChild(emailFeedback);
 
-    // Validación — más profesional
-    const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // --- 1) Validación de correo con API EVA ---
+  async function validarCorreoAPI(correo) {
+    try {
+      const resp = await fetch(`https://api.eva.pingutil.com/email?email=${correo}`);
+      const data = await resp.json();
 
-    if (!nombre) {
-      alert('Por favor escribe tu nombre para continuar.');
+      return data.data.deliverable; // true si el correo existe
+    } catch (error) {
+      console.error("Error validando correo:", error);
+      return true; // si falla la API, no bloqueamos todo
+    }
+  }
+
+  // --- 2) Validación en tiempo real ---
+  campoCorreo.addEventListener("input", async () => {
+    const correo = campoCorreo.value.trim();
+
+    if (correo.length < 5) {
+      emailFeedback.textContent = "Escribe un correo para validar…";
+      emailFeedback.style.color = "#777";
       return;
     }
 
-    if (!correo || !correoRegex.test(correo)) {
-      alert('Por favor ingresa un correo válido.');
-      return;
+    emailFeedback.textContent = "Validando correo…";
+    emailFeedback.style.color = "#444";
+
+    const valido = await validarCorreoAPI(correo);
+
+    if (valido) {
+      emailFeedback.textContent = "✔ Correo válido";
+      emailFeedback.style.color = "green";
+    } else {
+      emailFeedback.textContent = "✖ Este correo no es válido o no existe";
+      emailFeedback.style.color = "red";
+    }
+  });
+
+  // --- 3) Guardar contacto en localStorage ---
+  function guardarContacto(nombre, correo, mensaje) {
+    const contactos = JSON.parse(localStorage.getItem("contactos") || "[]");
+
+    contactos.push({
+      nombre,
+      correo,
+      mensaje,
+      fecha: new Date().toISOString()
+    });
+
+    localStorage.setItem("contactos", JSON.stringify(contactos));
+  }
+
+  // --- 4) Manejo del envío del formulario ---
+  formContacto.addEventListener('submit', async function (e) {
+
+    const nombre = campoNombre.value.trim();
+    const correo = campoCorreo.value.trim();
+    const mensaje = campoMensaje ? campoMensaje.value.trim() : "";
+
+    // Validación básica
+    if (!nombre || !correo) {
+      e.preventDefault();
+      alert('Por favor completa tu nombre y correo antes de enviar.');
+      return false;
     }
 
-    if (!mensaje) {
-      alert('Por favor escribe un mensaje antes de enviar.');
-      return;
+    // Validación avanzada del correo usando API
+    const correoValido = await validarCorreoAPI(correo);
+    if (!correoValido) {
+      e.preventDefault();
+      alert("El correo ingresado no parece válido. Por favor revísalo.");
+      return false;
     }
 
-    // Confirmación visual
-    alert(`¡Gracias, ${nombre}!  
-Hemos recibido tu mensaje correctamente.  
-Nos pondremos en contacto contigo pronto.`);
+    // Guardamos internamente
+    guardarContacto(nombre, correo, mensaje);
 
-    // Opcional: Enviar a WhatsApp (descomentar para usar)
-    /*
-    const numeroWhatsApp = "18091234567"; // <- Cambiar por número real del negocio
-    const texto = `Hola, soy ${nombre}. Mi correo es ${correo}. Mensaje: ${mensaje}`;
-    const urlWA = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
-    window.open(urlWA, "_blank");
-    */
+    // Envío simulado con fetch POST
+    try {
+      await fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, correo, mensaje })
+      })
+        .then(r => r.json())
+        .then(data => console.log("Contacto enviado (simulado):", data));
+    } catch (error) {
+      console.error("Error al enviar contacto:", error);
+    }
 
-    // Limpieza del formulario
-    formContacto.reset();
+    // Dejar que la alerta original del proyecto se ejecute sin bloquear
+    return true;
   });
 }
-
 
 });
