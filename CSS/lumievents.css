@@ -223,6 +223,7 @@ h1, h2, h3 {
 
 .services-grid {
     margin-top: 2rem;
+    margin-bottom: 1rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
@@ -233,9 +234,9 @@ h1, h2, h3 {
     display: flex;
     gap: 1rem;
     padding: 1.25rem;
-    background-color: #f9fafb;
+    background-color: #f3f4f5;
     border-radius: 0.5rem;
-    box-shadow: 0 15px 15px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 15px 15px 5px rgba(15, 23, 42, 0.08);
     border-left: 4px solid #c89a2b;
 }
 
@@ -447,6 +448,7 @@ input:focus, textarea:focus {
     background-color: #111827;
     color: #e5e7eb;
     font-size: 0.85rem;
+    display: flex;
 }
 
 .footer-grid {
