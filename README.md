@@ -180,9 +180,9 @@ El sitio aplica breakpoints para adaptarse a:
 
 ## 👥 Autores (comentarios como en el código)
 
-* **Milena** 
-* **Diego** 
-* **Yineth** 
+* **Whitney Milena** 
+* **Diego Martijena** 
+* **Yineth Herrera** 
 * **Brayand Estrella** 
 
 ---
