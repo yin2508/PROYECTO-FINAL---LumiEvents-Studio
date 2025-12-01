@@ -22,7 +22,9 @@ body {
     margin: 0 auto;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     color: #1f2933;
 }
 
@@ -39,7 +41,8 @@ h1, h2, h3 {
     padding: 0.75rem 1.5rem;
     border-radius: 999px;
     border: none;
-    background-color: #c89a2b; /* Dorado suave */
+    background-color: #c89a2b;
+    /* Dorado suave */
     color: #ffffff;
     font-weight: 600;
     text-decoration: none;
@@ -49,7 +52,7 @@ h1, h2, h3 {
 
 .btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .btn-secondary {
@@ -97,9 +100,11 @@ h1, h2, h3 {
     width: 48px;
     height: 48px;
     border-radius: 999px;
-    border-radius: 999px;/*sirve para hacer circulos*/
-    background-image: url("/IMAGENES/logoLumi.png"); 
-    background-size: cover; /* ajusta la imagen al contenedor */
+    border-radius: 999px;
+    /*sirve para hacer circulos*/
+    background-image: url("/IMAGENES/logoLumi.png");
+    background-size: cover;
+    /* ajusta la imagen al contenedor */
     background-position: center;
     background-repeat: no-repeat;
     /* elimina o cambia el color de fondo */
@@ -118,6 +123,7 @@ h1, h2, h3 {
     gap: 1.5rem;
     list-style: none;
 }
+
 /*lo use porque no me dejaba poner el color en el a*/
 .main-nav a {
     text-decoration: none;
@@ -307,15 +313,18 @@ h1, h2, h3 {
 .portfolio-image-placeholder.boda {
     background-image: url("/IMAGENES/boda.jpeg");
 }
+
 .portfolio-image-placeholder.conversatorio {
     background-image: url("/IMAGENES/conversatorio.jpeg");
 }
+
 .portfolio-image-placeholder.corporativo {
     background-image: url("/IMAGENES/corporativo.jpeg");
 }
+
 .portfolio-item h3 {
-     margin-top: 0.75rem;
-      font-size: 0.95rem;
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
 }
 
 /* =======================
@@ -345,9 +354,12 @@ h1, h2, h3 {
     height: 260px;
     border-radius: 1rem;
     background-color: #e5e7eb;
-    background-size: cover;        /* SE ADAPTA AL CUADRO SIN DEFORMARSE */
-    background-position: center;   /* SE CENTRA */
-    background-repeat: no-repeat;  /* NO SE REPITE */
+    background-size: cover;
+    /* SE ADAPTA AL CUADRO SIN DEFORMARSE */
+    background-position: center;
+    /* SE CENTRA */
+    background-repeat: no-repeat;
+    /* NO SE REPITE */
 }
 
 /* =======================
@@ -412,7 +424,8 @@ label {
     font-size: 0.9rem;
 }
 
-input, textarea {
+input,
+textarea {
     width: 100%;
     padding: 0.55rem 0.6rem;
     border-radius: 0.4rem;
@@ -420,10 +433,11 @@ input, textarea {
     font-size: 0.9rem;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
     outline: none;
     border-color: #c89a2b;
-    box-shadow: 0 0 0 1px rgba(200,154,43,0.4);
+    box-shadow: 0 0 0 1px rgba(200, 154, 43, 0.4);
 }
 
 /*Diego: Ajustes adicionales a la sección de contacto directo, para que los espaciados se vean más naturales.*/
@@ -432,7 +446,7 @@ input:focus, textarea:focus {
 }
 
 #contact-form {
- padding-top: 5px;
+    padding-top: 5px;
 }
 
 .contact-whatsapp h3 {
@@ -567,6 +581,7 @@ input:focus, textarea:focus {
 }
 
 @media (max-width: 700px) {
+
     .services-grid,
     .portfolio-grid,
     .testimonials-grid {
