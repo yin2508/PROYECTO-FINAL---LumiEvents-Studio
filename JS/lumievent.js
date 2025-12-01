@@ -278,16 +278,7 @@ function initAdminPage() {
         });
     }
 
-<<<<<<< HEAD
-    // Yineth: Optimización del Formulario.
-    // ===============================
-// FORMULARIO LUMIEVENTS 
-// ===============================
-
-const formContacto = document.getElementById("contact-form");
-=======
     renderGaleria();
->>>>>>> 12106e914c1e1220a6b624f5be7cadcacc9dd9dd
 
     // -------------------------------------------------------
     // 4. AJUSTES GENERALES – colores + dark mode
@@ -297,56 +288,6 @@ const formContacto = document.getElementById("contact-form");
     const colorFondo = document.getElementById("colorFondo");
     const temaAdmin = document.getElementById("temaAdmin");
 
-<<<<<<< HEAD
-    formContacto.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        // Capturamos los valores del formulario
-        const nombre = document.getElementById("nombre").value.trim();
-        const correo = document.getElementById("email").value.trim();
-        const telefono = document.getElementById("telefono").value.trim();
-        const motivo = document.getElementById("motivo").value.trim();
-        const asunto = document.getElementById("asunto").value.trim();
-        const mensaje = document.getElementById("mensaje").value.trim();
-        const acepto = document.getElementById("acepto").checked;
-
-        // Validación básica
-        if (!nombre || !correo || !telefono || !motivo || !asunto || !mensaje || !acepto) {
-            alert("Por favor completa todos los campos obligatorios.");
-            return;
-        }
-
-        // -----------------------------
-        // ENVÍO A GOOGLE SHEETS
-        // -----------------------------
-        const submitBtn = formContacto.querySelector("button");
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Enviando...";
-
-        try {
-            await fetch(
-                "https://script.google.com/macros/s/AKfycbzl6biF2_Hk9W0KrLD04X5cVfsetOdWCj2IB-aXQ0mWFba6SV6Ij8PuMf_BuovRMBha/exec",
-                {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ nombre, correo, telefono, motivo, asunto, mensaje })
-                }
-            );
-
-            alert("¡Tu mensaje ha sido enviado exitosamente!");
-            formContacto.reset();
-
-        } catch (error) {
-            alert("Hubo un error al enviar tu mensaje.");
-            console.error(error);
-        }
-
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Enviar mensaje";
-    });
-}
-=======
     // Milena: Cargar ajustes iniciales.
     if (data.ajustes) {
         colorBoton.value = data.ajustes.colorBoton;

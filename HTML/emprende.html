@@ -240,93 +240,91 @@
                     <h2>Contáctanos</h2>
                     <p>Cuéntanos sobre tu evento y nos pondremos en contacto contigo.</p>
 
-                    
-                     <!-- Yineth: PENDIENTE Agregar feedback de nombre del contacto. -->
-                     <!-- Yineth> Agrego mas campos al formulario y en JS se hace mas interactivo--> 
+
+                    <!-- Yineth: PENDIENTE Agregar feedback de nombre del contacto. -->
+                    <!-- Yineth> Agrego mas campos al formulario y en JS se hace mas interactivo-->
                     <form id="contact-form">
 
-                    <!-- Nombre -->
-                     <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
+                        <!-- Nombre -->
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
 
-                    <!-- Correo -->
-                    <div class="form-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email" required>
-                        <small id="email-msg" class="email-msg"></small>
-                    </div>
+                        <!-- Correo -->
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                            <small id="email-msg" class="email-msg"></small>
+                        </div>
 
-                    <!-- Teléfono -->
-                    <div class="form-group">
-                        <label for="telefono">Teléfono</label>
-                        <input type="tel" id="telefono" name="telefono" placeholder="+1 809-000-0000" required>
-                    </div>
+                        <!-- Teléfono -->
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="+1 809-000-0000" required>
+                        </div>
 
-                    <!-- Motivo -->
-                    <div class="form-group">
-                        <label for="motivo">Motivo del contacto</label>
-                        <select id="motivo" name="motivo" required>
-                            <option value="">Selecciona...</option>
-                            <option value="informacion">Solicitar información</option>
-                            <option value="soporte">Soporte técnico</option>
-                            <option value="cotizacion">Solicitar cotización</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                    </div>
+                        <!-- Motivo -->
+                        <div class="form-group">
+                            <label for="motivo">Motivo del contacto</label>
+                            <select id="motivo" name="motivo" required>
+                                <option value="">Selecciona...</option>
+                                <option value="informacion">Solicitar información</option>
+                                <option value="soporte">Soporte técnico</option>
+                                <option value="cotizacion">Solicitar cotización</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
 
-                    <!-- Asunto -->
-                    <div class="form-group">
-                        <label for="asunto">Asunto</label>
-                        <input type="text" id="asunto" name="asunto" required>
-                    </div>
+                        <!-- Asunto -->
+                        <div class="form-group">
+                            <label for="asunto">Asunto</label>
+                            <input type="text" id="asunto" name="asunto" required>
+                        </div>
 
-                    <!-- Mensaje -->
-                    <div class="form-group">
-                        <label for="mensaje">Mensaje</label>
-                        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-                    </div>
+                        <!-- Mensaje -->
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                        </div>
 
-                    <!-- Aceptar -->
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" id="acepto" required>
-                            Acepto las políticas de privacidad.
-                        </label>
-                    </div>
+                        <!-- Aceptar -->
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="acepto" required>
+                                Acepto las políticas de privacidad.
+                            </label>
+                        </div>
 
-                    <p class="privacy-note">
-Al enviar este formulario, aceptas nuestra <a href="politica-privacidad.html" target="_blank">Política de Privacidad</a>Política de Privacidad</a>.
-</p>
-
-
-                    
+                        <p class="privacy-note">
+                            Al enviar este formulario, aceptas nuestra <a href="politica-privacidad.html"
+                                target="_blank">Política de Privacidad</a>Política de Privacidad</a>.
+                        </p>
 
 
-                    <button type="submit" class="btn-primary">Enviar mensaje</button>
+                        <button type="submit" class="btn-primary">Enviar mensaje</button>
 
-    </form>
+                    </form>
 
-                <div class="contact-whatsapp">
-                    <h3>También por WhatsApp</h3>
-                    <p>Puedes escribirnos directamente para cotizar tu evento.</p>
-                    <!-- Diego: Link a la API de WhatsApp como especifica el proyecto. Se han puesto un line break para que haya un pequeño espacio entre el texto y el botón.-->
+                    <div class="contact-whatsapp">
+                        <h3>También por WhatsApp</h3>
+                        <p>Puedes escribirnos directamente para cotizar tu evento.</p>
+                        <!-- Diego: Link a la API de WhatsApp como especifica el proyecto. Se han puesto un line break para que haya un pequeño espacio entre el texto y el botón.-->
 
-                    <br>
-                    <a href="https://wa.me/18290000000?text=Hola%20LumiEvents%20me%20gustaría%20cotizar%20un%20evento"
-                        class="btn-secondary" target="_blank">
-                        Escribir por WhatsApp
-                    </a>
-
-                    <div class="redes">
-                        <a href="https://www.instagram.com/lumi_eventsrd?igsh=a3BpaXcxbnBzbncx&utm_source=qr" class="ig"
-                            target="_blank">
-                            <img src="/IMAGENES/ig-logo.png" class="contact-item">
+                        <br>
+                        <a href="https://wa.me/18290000000?text=Hola%20LumiEvents%20me%20gustaría%20cotizar%20un%20evento"
+                            class="btn-secondary" target="_blank">
+                            Escribir por WhatsApp
                         </a>
+
+                        <div class="redes">
+                            <a href="https://www.instagram.com/lumi_eventsrd?igsh=a3BpaXcxbnBzbncx&utm_source=qr"
+                                class="ig" target="_blank">
+                                <img src="/IMAGENES/ig-logo.png" class="contact-item">
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
     </main>
 
