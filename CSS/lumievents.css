@@ -265,7 +265,9 @@ h1, h2, h3 {
     text-align: center;
 }
 
+/*prueba*/
 .portfolio-grid {
+    background-image: url("/IMAGENES/boda.jpeg");
     margin-top: 2rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
