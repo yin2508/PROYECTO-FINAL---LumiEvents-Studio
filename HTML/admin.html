@@ -6,19 +6,27 @@
     <title>Panel Administrativo - LumiEvents</title>
     <link rel="stylesheet" href="/CSS/lumievents.css">
 </head>
+
 <body data-page="admin" class="admin-body">
-    <!-- Yineth: Este panel es el que simula el CMS básico que pide el proyecto. -->
+
+    <!-- Yineth: Encabezado principal del panel administrativo -->
     <header class="admin-header">
         <div class="container">
             <h1>Panel administrativo - LumiEvents Studio</h1>
-            <p>Desde aquí el emprendedor puede actualizar textos, servicios e imágenes.</p>
+            <p>Desde aquí el emprendedor puede actualizar textos, servicios, galería y ajustes del sitio.</p>
         </div>
     </header>
 
     <main class="admin-main container">
-        <!-- Milena: Sección para editar los textos principales del banner e inicio. -->
+
+        <!-- ==============================
+             Milena: Textos principales
+        =============================== -->
         <section class="admin-section">
             <h2>Textos principales</h2>
+
+            <p class="section-subtitle">Actualiza el contenido que aparece en el banner de la página principal.</p>
+
             <form id="form-textos">
                 <div class="form-group">
                     <label for="heroTitleInput">Título del banner</label>
@@ -35,57 +43,121 @@
                     <textarea id="introTextInput" rows="3"></textarea>
                 </div>
 
-                <!-- Brayand: Este botón actualizará los textos en localStorage. -->
                 <button type="submit" class="btn-primary">Guardar textos</button>
             </form>
         </section>
 
-        <!-- Diego: Sección CRUD de servicios para cumplir la parte de crear, editar y eliminar. -->
+        <!-- ==============================
+             Diego: CRUD Servicios
+        =============================== -->
         <section class="admin-section">
             <h2>Servicios</h2>
+
+            <p class="section-subtitle">Crea, edita o elimina los servicios que aparecen en la página pública.</p>
+
             <form id="form-servicio">
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="servicioNombre">Nombre del servicio</label>
                         <input type="text" id="servicioNombre" required>
                     </div>
+
                     <div class="form-group">
-                        <label for="servicioDescripcion">Descripción</label>
+                        <label for="servicioDescripcion">Descripción del servicio</label>
                         <textarea id="servicioDescripcion" rows="3" required></textarea>
                     </div>
+
                     <div class="form-group">
                         <label for="servicioIconoUrl">URL del ícono (opcional)</label>
                         <input type="url" id="servicioIconoUrl" placeholder="https://...">
-                        <!-- Milena: Usamos URL para respetar la condición de “no subir archivos”, solo por enlace. -->
+                        <!-- Milena: Usamos enlace para no subir archivos -->
                     </div>
                 </div>
+
                 <button type="submit" class="btn-primary">Agregar servicio</button>
             </form>
 
             <div class="admin-list">
                 <h3>Servicios registrados</h3>
-                <!-- Brayand: Esta lista se llena dinámicamente con JS. -->
+
+                <!-- Brayand: Barra de herramientas -->
+                <div class="admin-tools">
+                    <input type="text" id="buscarServicio" class="admin-search" placeholder="Buscar servicio...">
+                    <button class="btn-secondary" id="ordenarAZ">A → Z</button>
+                    <button class="btn-secondary" id="ordenarZA">Z → A</button>
+                </div>
+
                 <ul id="lista-servicios"></ul>
             </div>
         </section>
 
-        <!-- Galería de imágenes -->
+        <!-- ==============================
+             Galería de imágenes
+        =============================== -->
         <section class="admin-section">
             <h2>Galería (portafolio)</h2>
+
+            <p class="section-subtitle">Añade las imágenes que se mostrarán en la galería del sitio.</p>
+
             <form id="form-galeria">
                 <div class="form-group">
                     <label for="galeriaUrl">URL de la imagen</label>
                     <input type="url" id="galeriaUrl" placeholder="https://..." required>
                 </div>
+
                 <button type="submit" class="btn-primary">Agregar imagen</button>
             </form>
 
             <div class="admin-list">
-                <h3>Imágenes de la galería</h3>
-                <!-- Diego: También se llenará dinámicamente con JS. -->
+                <h3>Imágenes registradas</h3>
+
+                <!-- Yineth: Herramienta de búsqueda -->
+                <div class="admin-tools">
+                    <input type="text" id="buscarImagen" class="admin-search" placeholder="Buscar imagen por URL...">
+                </div>
+
                 <ul id="lista-galeria"></ul>
             </div>
         </section>
+
+        <!-- ==============================
+             NUEVO — Ajustes generales del sitio
+        =============================== -->
+        <section class="admin-section">
+            <h2>Ajustes generales</h2>
+
+            <p class="section-subtitle">
+                Personaliza los colores y el tema general del sitio sin necesidad de editar el CSS.
+            </p>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="colorBoton">Color del botón principal</label>
+                    <input type="color" id="colorBoton">
+                </div>
+
+                <div class="form-group">
+                    <label for="colorTexto">Color del texto principal</label>
+                    <input type="color" id="colorTexto">
+                </div>
+
+                <div class="form-group">
+                    <label for="colorFondo">Color del fondo general</label>
+                    <input type="color" id="colorFondo">
+                </div>
+
+                <div class="form-group">
+                    <label for="temaAdmin">Tema del panel</label>
+                    <select id="temaAdmin">
+                        <option value="light">Claro</option>
+                        <option value="dark">Oscuro</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="guardarAjustes" class="btn-primary">Guardar ajustes</button>
+        </section>
+
     </main>
 
     <footer class="site-footer admin-footer">
