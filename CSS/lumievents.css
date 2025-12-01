@@ -127,6 +127,7 @@ h1, h2, h3 {
 
 .main-nav a:hover {
     color: #c89a2b;
+    transition: 0.2s color ease;
 }
 
 /* Menú hamburguesa (para móvil) */
@@ -240,6 +241,10 @@ h1, h2, h3 {
 
 .icono {
     flex-shrink: 0;
+}
+
+.icono-unicode {
+    font-size: 200%;
 }
 
 /* Diego: El placeholder mantiene tamaño para que al poner el ícono real no se mueva nada. */
