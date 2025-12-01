@@ -251,23 +251,53 @@ document.addEventListener('DOMContentLoaded', () => {
             contactForm.reset();
         });
     }
-  // Manejo del formulario de contacto
-  // Evita recarga y muestra confirmación — tú puedes enviar a servidor más tarde.
-  // ---------------------------
-  const formContacto = document.querySelector('#contacto form');
-  if (formContacto) {
-    formContacto.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const nombre = formContacto.querySelector('#nombre') ? formContacto.querySelector('#nombre').value.trim() : '';
-      const correo = formContacto.querySelector('#correo') ? formContacto.querySelector('#correo').value.trim() : '';
-      if (!nombre || !correo) {
-        alert('Por favor completa tu nombre y correo antes de enviar.');
-        return;
-      }
-      // Mensaje de éxito (demo)
-      alert('Gracias, ' + nombre + '. Tu comentario ha sido recibido (demo local).');
-      formContacto.reset();
-    });
-  }
+  // Yineth: Optimización de Formulario de contacto.
+
+const formContacto = document.querySelector('#contacto form');
+
+if (formContacto) {
+  formContacto.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const nombre = formContacto.querySelector('#nombre')?.value.trim() || '';
+    const correo = formContacto.querySelector('#correo')?.value.trim() || '';
+    const mensaje = formContacto.querySelector('#mensaje')?.value.trim() || '';
+
+    // Validación — más profesional
+    const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!nombre) {
+      alert('Por favor escribe tu nombre para continuar.');
+      return;
+    }
+
+    if (!correo || !correoRegex.test(correo)) {
+      alert('Por favor ingresa un correo válido.');
+      return;
+    }
+
+    if (!mensaje) {
+      alert('Por favor escribe un mensaje antes de enviar.');
+      return;
+    }
+
+    // Confirmación visual
+    alert(`¡Gracias, ${nombre}!  
+Hemos recibido tu mensaje correctamente.  
+Nos pondremos en contacto contigo pronto.`);
+
+    // Opcional: Enviar a WhatsApp (descomentar para usar)
+    /*
+    const numeroWhatsApp = "18091234567"; // <- Cambiar por número real del negocio
+    const texto = `Hola, soy ${nombre}. Mi correo es ${correo}. Mensaje: ${mensaje}`;
+    const urlWA = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
+    window.open(urlWA, "_blank");
+    */
+
+    // Limpieza del formulario
+    formContacto.reset();
+  });
+}
+
 
 });
