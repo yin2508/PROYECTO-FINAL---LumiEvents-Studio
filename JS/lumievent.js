@@ -1,208 +1,243 @@
-// ===============================
-// LUMIEVENTS STUDIO – APP.JS
-// ===============================
+// ===========================================================
+// LUMIEVENTS STUDIO – SCRIPT COMPLETO
+// ===========================================================
 
-// Brayand: Definimos una clave única para guardar todo en localStorage.
+// Brayand: Definimos una clave única para guardar todo el contenido.
 const STORAGE_KEY = 'lumievents-data';
 
-// Diego: Datos por defecto, por si es la primera vez que se abre la página.
+// Diego: Estructura base por defecto.
 const defaultData = {
     textos: {
         heroTitle: 'Permítenos ser los arquitectos de momentos inolvidables, donde cada detalle cuenta y cada evento habla por sí mismo.',
         heroDescription: 'En LumiEvents Studio te ofrecemos no solo un servicio, sino una experiencia personalizada, cálida y jubilosa.',
-        introText: 'Diseñamos y organizamos eventos íntimos, bodas, conferencias y celebraciones especiales, cuidando cada detalle para que tú solo disfrutes del momento.'
+        introText: 'Diseñamos y organizamos eventos íntimos, bodas, conferencias y celebraciones especiales, cuidando cada detalle para que disfrutes del momento.'
     },
     servicios: [],
-    galeria: []
+    galeria: [],
+    ajustes: {
+        colorBoton: "#c89a2b",
+        colorTexto: "#1f2933",
+        colorFondo: "#ffffff",
+        temaAdmin: "light"
+    }
 };
 
-// Milena: Función para leer la configuración desde localStorage.
+// Milena: Leer datos de localStorage.
 function loadData() {
-    const dataString = localStorage.getItem(STORAGE_KEY);
-    if (!dataString) {
-        // Si no hay datos, devolvemos los valores por defecto.
-        return structuredClone(defaultData);
-    }
+    const str = localStorage.getItem(STORAGE_KEY);
+    if (!str) return structuredClone(defaultData);
 
     try {
-        return JSON.parse(dataString);
-    } catch (error) {
-        console.error('Error al parsear localStorage, se usará defaultData', error);
+        return JSON.parse(str);
+    } catch (e) {
+        console.error("Error leyendo localStorage, se cargarán valores base.", e);
         return structuredClone(defaultData);
     }
 }
 
-// Yineth: Guardamos la configuración actualizada en localStorage.
+// Yineth: Guardar cambios en localStorage.
 function saveData(data) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
-// ===============================
-// LÓGICA PÁGINA PÚBLICA (index.html)
-// ===============================
-
+// ===========================================================
+// PÁGINA PÚBLICA – index.html
+// ===========================================================
 function initPublicPage() {
     const data = loadData();
 
-    // Milena: Aplicamos textos dinámicamente para simular el CMS.
-    const heroTitle = document.getElementById('hero-title');
-    const heroDescription = document.getElementById('hero-description');
-    const introText = document.getElementById('intro-text');
+    // Milena: Aplicamos los textos guardados.
+    const title = document.getElementById('hero-title');
+    const desc = document.getElementById('hero-description');
+    const intro = document.getElementById('intro-text');
 
-    if (heroTitle) heroTitle.textContent = data.textos.heroTitle;
-    if (heroDescription) heroDescription.textContent = data.textos.heroDescription;
-    if (introText) introText.textContent = data.textos.introText;
+    if (title) title.textContent = data.textos.heroTitle;
+    if (desc) desc.textContent = data.textos.heroDescription;
+    if (intro) intro.textContent = data.textos.introText;
 
-    // Brayan: Por ahora mostramos solo un console.log para verificar datos.
-    console.log('Datos cargados en la página pública:', data);
-
-    // Diego: Más adelante aquí vamos a renderizar los servicios y la galería totalmente dinámicos.
-    // De momento dejamos los servicios estáticos que están en el HTML.
-    // Cuando conectemos el panel, llenaremos desde data.servicios y data.galeria.
+    console.log("Datos cargados en página pública:", data);
 }
 
-// ===============================
-// LÓGICA PANEL ADMIN (admin.html)
-// ===============================
-
+// ===========================================================
+// PÁGINA ADMINISTRATIVA – admin.html
+// ===========================================================
 function initAdminPage() {
+
     let data = loadData();
 
-    // Milena: Referencias a los campos de texto del formulario de textos principales.
-    const heroTitleInput = document.getElementById('heroTitleInput');
-    const heroDescriptionInput = document.getElementById('heroDescriptionInput');
-    const introTextInput = document.getElementById('introTextInput');
-    const formTextos = document.getElementById('form-textos');
+    // -------------------------------------------------------
+    // 1. TEXTOS PRINCIPALES – Autosave + carga inicial
+    // -------------------------------------------------------
+    const heroTitleInput = document.getElementById("heroTitleInput");
+    const heroDescriptionInput = document.getElementById("heroDescriptionInput");
+    const introTextInput = document.getElementById("introTextInput");
+    const formTextos = document.getElementById("form-textos");
 
-    if (heroTitleInput && heroDescriptionInput && introTextInput && formTextos) {
-        // Cargamos los valores actuales en los inputs.
+    if (heroTitleInput && heroDescriptionInput && introTextInput) {
+
+        // Diego: Cargar valores iniciales al panel
         heroTitleInput.value = data.textos.heroTitle;
         heroDescriptionInput.value = data.textos.heroDescription;
         introTextInput.value = data.textos.introText;
 
-        formTextos.addEventListener('submit', (event) => {
-            event.preventDefault();
+        // Brayand: Guardado manual
+        formTextos.addEventListener("submit", e => {
+            e.preventDefault();
 
-            // Yineth: Actualizamos los textos dentro del objeto data.
             data.textos.heroTitle = heroTitleInput.value;
             data.textos.heroDescription = heroDescriptionInput.value;
             data.textos.introText = introTextInput.value;
 
             saveData(data);
-            alert('Textos guardados correctamente.');
+            alert("Textos guardados correctamente.");
         });
     }
 
-    // ================== SERVICIOS (CRUD BÁSICO) ==================
-    const formServicio = document.getElementById('form-servicio');
-    const listaServicios = document.getElementById('lista-servicios');
+    // -------------------------------------------------------
+    // 2. CRUD SERVICIOS – Agregar, editar, eliminar
+    // -------------------------------------------------------
+    const formServicio = document.getElementById("form-servicio");
+    const listaServicios = document.getElementById("lista-servicios");
+    const buscarServicio = document.getElementById("buscarServicio");
 
     function renderServicios() {
-        if (!listaServicios) return;
-        listaServicios.innerHTML = '';
+        listaServicios.innerHTML = "";
+        pintarServicios(data.servicios);
+    }
 
-        data.servicios.forEach((servicio, index) => {
-            const li = document.createElement('li');
-            li.textContent = servicio.nombre + ' – ' + servicio.descripcion;
+    // Función interna para pintar una lista filtrada (Brayand)
+    function pintarServicios(arr) {
+        listaServicios.innerHTML = "";
 
-            // Botones Editar y Eliminar
-            const btnEdit = document.createElement('button');
-            btnEdit.textContent = 'Editar';
-            btnEdit.classList.add('btn-edit');
+        arr.forEach((servicio, index) => {
+            const li = document.createElement("li");
 
-            const btnDelete = document.createElement('button');
-            btnDelete.textContent = 'Eliminar';
-            btnDelete.classList.add('btn-delete');
+            li.innerHTML = `
+                <strong>${servicio.nombre}</strong> – ${servicio.descripcion}
+                ${servicio.iconoUrl ? `<img src="${servicio.iconoUrl}" class="img-preview">` : ""}
+            `;
 
-            // Brayand: Botón eliminar para quitar un servicio del arreglo.
-            btnDelete.addEventListener('click', () => {
+            const btnDelete = document.createElement("button");
+            btnDelete.textContent = "Eliminar";
+            btnDelete.classList.add("btn-delete");
+
+            const btnEdit = document.createElement("button");
+            btnEdit.textContent = "Editar";
+            btnEdit.classList.add("btn-edit");
+
+            // Diego: Editar servicio
+            btnEdit.addEventListener("click", () => {
+                document.getElementById("servicioNombre").value = servicio.nombre;
+                document.getElementById("servicioDescripcion").value = servicio.descripcion;
+                document.getElementById("servicioIconoUrl").value = servicio.iconoUrl || "";
+
                 data.servicios.splice(index, 1);
                 saveData(data);
                 renderServicios();
             });
 
-            // Diego: Botón editar que simplemente carga el servicio en el formulario.
-            btnEdit.addEventListener('click', () => {
-                document.getElementById('servicioNombre').value = servicio.nombre;
-                document.getElementById('servicioDescripcion').value = servicio.descripcion;
-                document.getElementById('servicioIconoUrl').value = servicio.iconoUrl || '';
-
-                // Borramos el elemento actual para que al guardar se reemplace.
+            // Yineth: Confirmar eliminación
+            btnDelete.addEventListener("click", () => {
+                if (!confirm("¿Eliminar este servicio definitivamente?")) return;
                 data.servicios.splice(index, 1);
                 saveData(data);
                 renderServicios();
             });
 
-            const buttonBox = document.createElement('div');
-            buttonBox.appendChild(btnEdit);
-            buttonBox.appendChild(btnDelete);
-
-            li.appendChild(buttonBox);
+            li.appendChild(btnEdit);
+            li.appendChild(btnDelete);
             listaServicios.appendChild(li);
         });
     }
 
-    if (formServicio && listaServicios) {
-        formServicio.addEventListener('submit', (event) => {
-            event.preventDefault();
+    // FORMULARIO: Agregar servicio
+    if (formServicio) {
+        formServicio.addEventListener("submit", e => {
+            e.preventDefault();
 
-            const nombre = document.getElementById('servicioNombre').value.trim();
-            const descripcion = document.getElementById('servicioDescripcion').value.trim();
-            const iconoUrl = document.getElementById('servicioIconoUrl').value.trim();
+            const nombre = document.getElementById("servicioNombre").value.trim();
+            const descripcion = document.getElementById("servicioDescripcion").value.trim();
+            const iconoUrl = document.getElementById("servicioIconoUrl").value.trim();
 
             if (!nombre || !descripcion) {
-                alert('Por favor completa nombre y descripción del servicio.');
+                alert("Completa el nombre y la descripción.");
                 return;
             }
 
-            // Yineth: Creamos el objeto servicio y lo agregamos al arreglo.
-            const nuevoServicio = { nombre, descripcion, iconoUrl };
-            data.servicios.push(nuevoServicio);
+            data.servicios.push({ nombre, descripcion, iconoUrl });
             saveData(data);
 
-            // Limpiamos el formulario
             formServicio.reset();
             renderServicios();
         });
-
-        // Render inicial
-        renderServicios();
     }
 
-    // ================== GALERÍA ==================
-    const formGaleria = document.getElementById('form-galeria');
-    const listaGaleria = document.getElementById('lista-galeria');
+    // BUSCADOR de servicios
+    if (buscarServicio) {
+        buscarServicio.addEventListener("input", () => {
+            const txt = buscarServicio.value.toLowerCase();
+
+            const filtrados = data.servicios.filter(s =>
+                s.nombre.toLowerCase().includes(txt) ||
+                s.descripcion.toLowerCase().includes(txt)
+            );
+
+            pintarServicios(filtrados);
+        });
+    }
+
+    // ORDENAR A–Z / Z–A
+    document.getElementById("ordenarAZ")?.addEventListener("click", () => {
+        data.servicios.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        saveData(data);
+        renderServicios();
+    });
+
+    document.getElementById("ordenarZA")?.addEventListener("click", () => {
+        data.servicios.sort((a, b) => b.nombre.localeCompare(a.nombre));
+        saveData(data);
+        renderServicios();
+    });
+
+    renderServicios();
+
+    // -------------------------------------------------------
+    // 3. GALERÍA – CRUD + preview + buscador
+    // -------------------------------------------------------
+    const formGaleria = document.getElementById("form-galeria");
+    const listaGaleria = document.getElementById("lista-galeria");
+    const buscarImagen = document.getElementById("buscarImagen");
 
     function renderGaleria() {
-        if (!listaGaleria) return;
-        listaGaleria.innerHTML = '';
+        listaGaleria.innerHTML = "";
 
         data.galeria.forEach((url, index) => {
-            const li = document.createElement('li');
-            li.textContent = url;
+            const li = document.createElement("li");
+            li.innerHTML = `${url} <img src="${url}" class="img-preview">`;
 
-            const btnDelete = document.createElement('button');
-            btnDelete.textContent = 'Eliminar';
-            btnDelete.classList.add('btn-delete');
+            const del = document.createElement("button");
+            del.textContent = "Eliminar";
+            del.classList.add("btn-delete");
 
-            btnDelete.addEventListener('click', () => {
+            del.addEventListener("click", () => {
+                if (!confirm("¿Eliminar esta imagen?")) return;
                 data.galeria.splice(index, 1);
                 saveData(data);
                 renderGaleria();
             });
 
-            li.appendChild(btnDelete);
+            li.appendChild(del);
             listaGaleria.appendChild(li);
         });
     }
 
-    if (formGaleria && listaGaleria) {
-        formGaleria.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const url = document.getElementById('galeriaUrl').value.trim();
+    if (formGaleria) {
+        formGaleria.addEventListener("submit", e => {
+            e.preventDefault();
+            const url = document.getElementById("galeriaUrl").value.trim();
 
             if (!url) {
-                alert('Por favor ingresa una URL válida.');
+                alert("Ingresa una URL válida.");
                 return;
             }
 
@@ -211,146 +246,129 @@ function initAdminPage() {
             formGaleria.reset();
             renderGaleria();
         });
-
-        renderGaleria();
     }
 
-    console.log('Panel admin inicializado con datos:', data);
-}
+    if (buscarImagen) {
+        buscarImagen.addEventListener("input", () => {
+            const t = buscarImagen.value.toLowerCase();
 
-// ===============================
-// INTERACCIÓN GENERAL (NAV, ETC.)
-// ===============================
+            const filtradas = data.galeria.filter(url =>
+                url.toLowerCase().includes(t)
+            );
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Milena: Detectamos qué tipo de página es (public o admin) con el data-page del body.
-    const pageType = document.body.dataset.page;
+            listaGaleria.innerHTML = "";
+            filtradas.forEach((url, index) => {
+                const li = document.createElement("li");
+                li.innerHTML = `${url} <img class="img-preview" src="${url}">`;
 
-    if (pageType === 'public') {
-        initPublicPage();
-    } else if (pageType === 'admin') {
-        initAdminPage();
-    }
+                const del = document.createElement("button");
+                del.textContent = "Eliminar";
+                del.classList.add("btn-delete");
 
-    // Diego: Lógica simple para abrir/cerrar el menú en móviles.
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const mainNav = document.querySelector('.main-nav');
+                del.addEventListener("click", () => {
+                    if (!confirm("Eliminar esta imagen?")) return;
+                    data.galeria.splice(index, 1);
+                    saveData(data);
+                    renderGaleria();
+                });
 
-    if (hamburgerBtn && mainNav) {
-        hamburgerBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('open');
+                li.appendChild(del);
+                listaGaleria.appendChild(li);
+            });
         });
     }
 
-    // Yineth: Optimización del Formulario.
-    const formContacto = document.querySelector('#contact-form');
+    renderGaleria();
 
-if (formContacto) {
+    // -------------------------------------------------------
+    // 4. AJUSTES GENERALES – colores + dark mode
+    // -------------------------------------------------------
+    const colorBoton = document.getElementById("colorBoton");
+    const colorTexto = document.getElementById("colorTexto");
+    const colorFondo = document.getElementById("colorFondo");
+    const temaAdmin = document.getElementById("temaAdmin");
 
-  const campoNombre = formContacto.querySelector('#nombre');
-  const campoCorreo = formContacto.querySelector('#email');
-  const campoMensaje = formContacto.querySelector('#mensaje');
-  
-  // Yineth: Mensaje creado debajo del input email para validación en tiempo real
-  let emailFeedback = document.createElement("small");
-  emailFeedback.style.display = "block";
-  emailFeedback.style.marginTop = "4px";
-  emailFeedback.style.fontSize = "14px";
-  emailFeedback.style.fontWeight = "500";
-  formContacto.querySelector('.campo-email')?.appendChild(emailFeedback);
+    // Milena: Cargar ajustes iniciales.
+    if (data.ajustes) {
+        colorBoton.value = data.ajustes.colorBoton;
+        colorTexto.value = data.ajustes.colorTexto;
+        colorFondo.value = data.ajustes.colorFondo;
+        temaAdmin.value = data.ajustes.temaAdmin;
 
-  // --- 1) Validación de correo con API EVA ---
-  async function validarCorreoAPI(correo) {
-    try {
-      const resp = await fetch(`https://api.eva.pingutil.com/email?email=${correo}`);
-      const data = await resp.json();
-
-      return data.data.deliverable; // true si el correo existe
-    } catch (error) {
-      console.error("Error validando correo:", error);
-      return true; // si falla la API, no bloqueamos todo
-    }
-  }
-
-  // --- 2) Validación en tiempo real ---
-  campoCorreo.addEventListener("input", async () => {
-    const correo = campoCorreo.value.trim();
-
-    if (correo.length < 5) {
-      emailFeedback.textContent = "Escribe un correo para validar…";
-      emailFeedback.style.color = "#777";
-      return;
+        aplicarAjustes(data.ajustes);
     }
 
-    emailFeedback.textContent = "Validando correo…";
-    emailFeedback.style.color = "#444";
+    document.getElementById("guardarAjustes").addEventListener("click", () => {
+        data.ajustes = {
+            colorBoton: colorBoton.value,
+            colorTexto: colorTexto.value,
+            colorFondo: colorFondo.value,
+            temaAdmin: temaAdmin.value
+        };
 
-    const valido = await validarCorreoAPI(correo);
+        saveData(data);
+        aplicarAjustes(data.ajustes);
 
-    if (valido) {
-      emailFeedback.textContent = "✔ Correo válido";
-      emailFeedback.style.color = "green";
-    } else {
-      emailFeedback.textContent = "✖ Este correo no es válido o no existe";
-      emailFeedback.style.color = "red";
-    }
-  });
-
-  // --- 3) Guardar contacto en localStorage ---
-  function guardarContacto(nombre, correo, mensaje) {
-    const contactos = JSON.parse(localStorage.getItem("contactos") || "[]");
-
-    contactos.push({
-      nombre,
-      correo,
-      mensaje,
-      fecha: new Date().toISOString()
+        alert("Ajustes guardados correctamente.");
     });
 
-    localStorage.setItem("contactos", JSON.stringify(contactos));
-  }
+    // Aplicar Visualmente los ajustes
+    function aplicarAjustes(a) {
+        // Diego: Aplicar colores dinámicos.
+        document.documentElement.style.setProperty('--color-boton', a.colorBoton);
+        document.body.style.color = a.colorTexto;
+        document.body.style.backgroundColor = a.colorFondo;
 
-  // --- 4) Manejo del envío del formulario ---
-  formContacto.addEventListener('submit', async function (e) {
-
-    const nombre = campoNombre.value.trim();
-    const correo = campoCorreo.value.trim();
-    const mensaje = campoMensaje ? campoMensaje.value.trim() : "";
-
-    // Validación básica
-    if (!nombre || !correo) {
-      e.preventDefault();
-      alert('Por favor completa tu nombre y correo antes de enviar.');
-      return false;
+        // Modo oscuro
+        if (a.temaAdmin === "dark") {
+            document.body.classList.add("admin-dark");
+        } else {
+            document.body.classList.remove("admin-dark");
+        }
     }
 
-    // Validación avanzada del correo usando API
-    const correoValido = await validarCorreoAPI(correo);
-    if (!correoValido) {
-      e.preventDefault();
-      alert("El correo ingresado no parece válido. Por favor revísalo.");
-      return false;
-    }
-
-    // Guardamos internamente
-    guardarContacto(nombre, correo, mensaje);
-
-    // Envío simulado con fetch POST
-    try {
-      await fetch("https://jsonplaceholder.typicode.com/posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, correo, mensaje })
-      })
-        .then(r => r.json())
-        .then(data => console.log("Contacto enviado (simulado):", data));
-    } catch (error) {
-      console.error("Error al enviar contacto:", error);
-    }
-
-    // Dejar que la alerta original del proyecto se ejecute sin bloquear
-    return true;
-  });
+    console.log("Panel administrativo cargado:", data);
 }
 
+// ===========================================================
+// INTERACCIÓN GENERAL – Navegación móvil + formularios
+// ===========================================================
+document.addEventListener("DOMContentLoaded", () => {
+
+    const page = document.body.dataset.page;
+
+    if (page === 'public') initPublicPage();
+    if (page === 'admin') initAdminPage();
+
+    // Diego: Menú hamburguesa
+    const hamburger = document.getElementById("hamburgerBtn");
+    const mainNav = document.querySelector(".main-nav");
+
+    if (hamburger && mainNav) {
+        hamburger.addEventListener("click", () => {
+            mainNav.classList.toggle("open");
+        });
+    }
+
+    // ✔ FORMULARIO CONTACTO – página pública
+    const formContacto = document.querySelector('#contacto form');
+
+    if (formContacto) {
+        formContacto.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const nombre = formContacto.querySelector("#nombre").value.trim();
+            const correo = formContacto.querySelector("#email").value.trim();
+            const mensaje = formContacto.querySelector("#mensaje").value.trim();
+
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!nombre) return alert("Escribe tu nombre.");
+            if (!correo || !regex.test(correo)) return alert("Correo inválido.");
+            if (!mensaje) return alert("Escribe un mensaje.");
+
+            alert(`¡Gracias, ${nombre}! Tu mensaje se ha enviado correctamente.`);
+            formContacto.reset();
+        });
+    }
 });
