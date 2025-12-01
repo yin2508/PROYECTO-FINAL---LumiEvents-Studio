@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo - LumiEvents</title>
+    <link rel="stylesheet" href="/CSS/lumievents.css">
+</head>
+<body data-page="admin" class="admin-body">
+    <!-- Yineth: Este panel es el que simula el CMS básico que pide el proyecto. -->
+    <header class="admin-header">
+        <div class="container">
+            <h1>Panel administrativo - LumiEvents Studio</h1>
+            <p>Desde aquí el emprendedor puede actualizar textos, servicios e imágenes.</p>
+        </div>
+    </header>
+
+    <main class="admin-main container">
+        <!-- Milena: Sección para editar los textos principales del banner e inicio. -->
+        <section class="admin-section">
+            <h2>Textos principales</h2>
+            <form id="form-textos">
+                <div class="form-group">
+                    <label for="heroTitleInput">Título del banner</label>
+                    <textarea id="heroTitleInput" rows="2"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="heroDescriptionInput">Descripción del banner</label>
+                    <textarea id="heroDescriptionInput" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="introTextInput">Texto de bienvenida</label>
+                    <textarea id="introTextInput" rows="3"></textarea>
+                </div>
+
+                <!-- Brayand: Este botón actualizará los textos en localStorage. -->
+                <button type="submit" class="btn-primary">Guardar textos</button>
+            </form>
+        </section>
+
+        <!-- Diego: Sección CRUD de servicios para cumplir la parte de crear, editar y eliminar. -->
+        <section class="admin-section">
+            <h2>Servicios</h2>
+            <form id="form-servicio">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="servicioNombre">Nombre del servicio</label>
+                        <input type="text" id="servicioNombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="servicioDescripcion">Descripción</label>
+                        <textarea id="servicioDescripcion" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="servicioIconoUrl">URL del ícono (opcional)</label>
+                        <input type="url" id="servicioIconoUrl" placeholder="https://...">
+                        <!-- Milena: Usamos URL para respetar la condición de “no subir archivos”, solo por enlace. -->
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Agregar servicio</button>
+            </form>
+
+            <div class="admin-list">
+                <h3>Servicios registrados</h3>
+                <!-- Brayand: Esta lista se llena dinámicamente con JS. -->
+                <ul id="lista-servicios"></ul>
+            </div>
+        </section>
+
+        <!-- Galería de imágenes -->
+        <section class="admin-section">
+            <h2>Galería (portafolio)</h2>
+            <form id="form-galeria">
+                <div class="form-group">
+                    <label for="galeriaUrl">URL de la imagen</label>
+                    <input type="url" id="galeriaUrl" placeholder="https://..." required>
+                </div>
+                <button type="submit" class="btn-primary">Agregar imagen</button>
+            </form>
+
+            <div class="admin-list">
+                <h3>Imágenes de la galería</h3>
+                <!-- Diego: También se llenará dinámicamente con JS. -->
+                <ul id="lista-galeria"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer admin-footer">
+        <div class="container">
+            <p>Panel administrativo de LumiEvents Studio – Uso académico.</p>
+        </div>
+    </footer>
+
+    <script src="/JS/lumievent.js"></script>
+</body>
+</html>

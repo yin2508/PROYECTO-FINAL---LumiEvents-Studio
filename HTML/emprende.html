@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LumiEvents Studio</title>
+    <!-- Milena: Conectamos el HTML con el CSS externo como pide la rúbrica para mantener el código limpio. -->
+    <link rel="stylesheet" href="/CSS/lumievents.css">
+</head>
+<body data-page="public">
+    <!-- Yineth: Usamos header semántico para cumplir las buenas prácticas de HTML del proyecto. -->
+    <header class="site-header">
+        <div class="top-bar container">
+            <div class="logo-box">
+                <!-- AQUI FALTA IMAGEN DEL LOGO PRINCIPAL -->
+                <!-- Milena: Dejamos el espacio del logo preparado para que al poner la imagen no rompa el layout. -->
+                <div class="logo-placeholder"></div>
+                <span class="logo-text">LumiEvents <strong>Studio</strong></span>
+            </div>
+
+            <!-- Diego: Menú de navegación inspirado en eventsplanner.com.do pero adaptado a nuestro proyecto. -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#portafolio">Portafolio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <!-- Brayand: Menú hamburguesa para móviles, así cumplimos con el requisito de diseño responsive. -->
+            <div class="hamburger" id="hamburgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Sección tipo banner grande -->
+        <section class="hero">
+            <!-- AQUI FALTA IMAGEN PRINCIPAL DEL BANNER -->
+            <!-- Diego: Usamos un div vacío, la imagen se controlará con CSS (background-image) para que no se deforme. -->
+            <div class="hero-image"></div>
+
+            <div class="hero-text container">
+                <p class="hero-tagline">Eventos | Bodas | Corporativos | Fiestas temáticas</p>
+                <h1 id="hero-title">
+                    Permítenos ser los arquitectos de momentos inolvidables, donde cada detalle cuenta y cada evento habla por sí mismo.
+                </h1>
+                <p id="hero-description">
+                    En LumiEvents Studio te ofrecemos no solo un servicio, sino una experiencia personalizada, cálida y jubilosa.
+                    Nos enfocamos en iluminar tus momentos más importantes con detalles que marcan la diferencia.
+                </p>
+                <!-- Milena: Botón de llamada a la acción hacia WhatsApp, cumpliendo el requisito de "llamada a la acción". -->
+                <a id="hero-cta" href="https://wa.me/18290000000?text=Hola%20LumiEvents%20quiero%20información%20sobre%20mis%20eventos" class="btn-primary" target="_blank">
+                    Reserva tu fecha
+                </a>
+            </div>
+        </section>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- Yineth: Section #inicio para anclar el menú "Inicio". -->
+        <section id="inicio" class="intro-section container">
+            <h2>Bienvenidos a LumiEvents Studio</h2>
+            <p id="intro-text">
+                Diseñamos y organizamos eventos íntimos, bodas, conferencias y celebraciones especiales,
+                cuidando cada detalle para que tú solo disfrutes del momento.
+            </p>
+        </section>
+
+        <!-- Sección de servicios inspirada en tu HTML y en la página de referencia -->
+        <section id="servicios" class="services-section">
+            <div class="container">
+                <h2>Nuestros servicios</h2>
+                <p class="section-subtitle">
+                    Ofrecemos diferentes modalidades para que encuentres la que se adapta a tu evento.
+                </p>
+
+                <!-- Brayand: Cada tarjeta es un servicio. Luego estos mismos servicios se podrán administrar desde el panel. -->
+                <div class="services-grid">
+                    <article class="card-servicio">
+                        <div class="icono">
+                            <!-- Milena: Usamos icono Unicode en vez de imagen -->
+                            <span class="icono-unicode">&#x1F48D;</span>
+                        </div>
+                        <div class="texto-servicio">
+                            <h3>Wedding Planner | Bodas</h3>
+                            <p>
+                                Con nuestro servicio cada aspecto de tu boda es organizado con pasión y precisión.
+                                Coordinamos cada paso para que tu único trabajo sea decir: “Sí, acepto”.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="card-servicio">
+                        <div class="icono">
+                            <span class="icono-unicode">&#128107;</span>
+                        </div>
+                        <div class="texto-servicio">
+                            <h3>Conversatorio para novios</h3>
+                            <p>
+                                Impulsamos el camino hacia el altar en un espacio interactivo donde profesionales
+                                comparten secretos y soluciones para una celebración sin contratiempos.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="card-servicio">
+                        <div class="icono">
+                            <span class="icono-unicode">&#127970;</span>
+                        </div>
+                        <div class="texto-servicio">
+                            <h3>Eventos corporativos</h3>
+                            <p>
+                                Desde conferencias hasta lanzamientos de producto, diseñamos experiencias que
+                                impresionan, enganchan y consiguen resultados.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="card-servicio">
+                        <div class="icono">
+                            <span class="icono-unicode">&#127863</span>
+                        </div>
+                        <div class="texto-servicio">
+                            <h3>Otros eventos y fiestas temáticas</h3>
+                            <p>
+                                Cumpleaños, aniversarios y reuniones especiales diseñadas para reflejar tu personalidad
+                                y crear la atmósfera que quieres proyectar.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="card-servicio">
+                        <div class="icono">
+                         <span class="icono-unicode">&#128146;</span>
+                        </div>
+                        <div class="texto-servicio">
+                            <h3>Wedding consultant</h3>
+                            <p>
+                                Te acompañamos con asesorías personalizadas para resolver dudas y tomar decisiones
+                                claras sobre tu gran día.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portafolio / Galería -->
+        <section id="portafolio" class="portfolio-section">
+            <div class="container">
+                <h2>Nuestro trabajo</h2>
+                <p class="section-subtitle">
+                    Una muestra de algunos eventos que hemos iluminado con nuestro estilo.
+                </p>
+
+                <!-- Diego: Aquí usamos tres columnas como la referencia. Las imágenes se cargarán luego. -->
+                <div class="portfolio-grid">
+                    <!-- AQUI FALTA IMAGEN BODA -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image-placeholder"></div>
+                        <h3>Bodas</h3>
+                    </div>
+
+                    <!-- AQUI FALTA IMAGEN EVENTO CORPORATIVO -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image-placeholder"></div>
+                        <h3>Eventos corporativos</h3>
+                    </div>
+
+                    <!-- AQUI FALTA IMAGEN CONVERSATORIO -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image-placeholder"></div>
+                        <h3>Conversatorio para novios</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nosotros -->
+        <section id="nosotros" class="about-section">
+            <div class="container about-grid">
+                <div>
+                    <h2>Sobre LumiEvents Studio</h2>
+                    <!-- Milena: Usamos un párrafo más largo para que se note que trabajamos los textos y no dejamos "lorem ipsum". -->
+                    <p id="about-text">
+                        LumiEvents Studio nace del talento creativo de Valeria Castillo, una emprendedora
+                        apasionada por transformar momentos simples en recuerdos inolvidables. Nuestro enfoque
+                        está en eventos pequeños y medianos donde el detalle y la calidez marcan la diferencia.
+                    </p>
+                    <p>
+                        Trabajamos mano a mano con cada cliente para que la decoración, la coordinación y la
+                        ambientación de su evento reflejen exactamente lo que sueña.
+                    </p>
+                </div>
+                <!-- AQUI FALTA IMAGEN DEL EQUIPO / EMPRENDEDORA -->
+                <div class="about-image-placeholder"></div>
+            </div>
+        </section>
+
+        <!-- Testimonios -->
+        <section id="testimonios" class="testimonials-section">
+            <div class="container">
+                <h2>Testimonios</h2>
+                <p class="section-subtitle">
+                    Algunas palabras de clientes que confiaron en nosotros.
+                </p>
+                <div class="testimonials-grid">
+                    <article class="testimonial-card">
+                        <p class="testimonial-text">
+                            “Gracias a LumiEvents nuestra boda fue mucho mejor de lo que imaginamos.
+                            El equipo estuvo pendiente de cada detalle.”
+                        </p>
+                        <p class="testimonial-author">– Laura Guzmán </p>
+                    </article>
+
+                    <article class="testimonial-card">
+                        <p class="testimonial-text">
+                            “Organizaron nuestro evento corporativo y quedamos encantados. Súper puntuales,
+                            organizados y creativos.”
+                        </p>
+                        <p class="testimonial-author">– Mairenny Salas</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contacto" class="contact-section">
+            <div class="container contact-grid">
+                <div>
+                    <h2>Contáctanos</h2>
+                    <p>Cuéntanos sobre tu evento y nos pondremos en contacto contigo.</p>
+
+                    <!-- Brayand: Formulario simple para practicar validaciones con JS más adelante. -->
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Enviar mensaje</button>
+                    </form>
+                </div>
+
+                <div class="contact-whatsapp">
+                    <h3>También por WhatsApp</h3>
+                    <p>Puedes escribirnos directamente para cotizar tu evento.</p>
+                    <!-- Diego: Link a la API de WhatsApp como especifica el proyecto. -->
+                    <a href="https://wa.me/18290000000?text=Hola%20LumiEvents%20me%20gustaría%20cotizar%20un%20evento"
+                       class="btn-secondary" target="_blank">
+                        Escribir por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <p>© 2025 LumiEvents Studio. Todos los derechos reservados.</p>
+            <p>Proyecto académico – Programación Web.</p>
+        </div>
+    </footer>
+
+    <!-- Milena: Colocamos el script al final para que cargue el DOM primero y luego el JS. -->
+    <script src="/JS/lumievent.js"></script>
+</body>
+</html>
