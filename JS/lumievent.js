@@ -251,4 +251,23 @@ document.addEventListener('DOMContentLoaded', () => {
             contactForm.reset();
         });
     }
+  // Manejo del formulario de contacto
+  // Evita recarga y muestra confirmación — tú puedes enviar a servidor más tarde.
+  // ---------------------------
+  const formContacto = document.querySelector('#contacto form');
+  if (formContacto) {
+    formContacto.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = formContacto.querySelector('#nombre') ? formContacto.querySelector('#nombre').value.trim() : '';
+      const correo = formContacto.querySelector('#correo') ? formContacto.querySelector('#correo').value.trim() : '';
+      if (!nombre || !correo) {
+        alert('Por favor completa tu nombre y correo antes de enviar.');
+        return;
+      }
+      // Mensaje de éxito (demo)
+      alert('Gracias, ' + nombre + '. Tu comentario ha sido recibido (demo local).');
+      formContacto.reset();
+    });
+  }
+
 });
