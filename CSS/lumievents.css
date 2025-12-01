@@ -30,6 +30,7 @@ h1, h2, h3 {
     margin-top: 0.5rem;
     margin-bottom: 2rem;
     color: #6b7280;
+    text-align: center;
 }
 
 /* Botones */
@@ -191,7 +192,7 @@ h1, h2, h3 {
    ======================= */
 
 .intro-section {
-    padding: 3rem 0 1rem 0;
+    padding: 1.5rem 0 1.5rem 0;
 }
 
 .intro-section h2 {
@@ -202,6 +203,7 @@ h1, h2, h3 {
 .intro-section p {
     max-width: 700px;
     color: #4b5563;
+    margin-bottom: 0.75rem;
 }
 
 /* =======================
@@ -232,6 +234,7 @@ h1, h2, h3 {
     padding: 1.25rem;
     background-color: #f9fafb;
     border-radius: 0.5rem;
+    box-shadow: 0 15px 15px rgba(15, 23, 42, 0.08);
     border-left: 4px solid #c89a2b;
 }
 
