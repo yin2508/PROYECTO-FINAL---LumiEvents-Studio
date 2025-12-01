@@ -417,6 +417,15 @@ input:focus, textarea:focus {
     box-shadow: 0 0 0 1px rgba(200,154,43,0.4);
 }
 
+/*Diego: Ajustes adicionales a la sección de contacto directo, para que los espaciados se vean más naturales.*/
+.contact-us {
+    line-height: 200%;
+}
+
+#contact-form {
+ padding-top: 5px;
+}
+
 .contact-whatsapp h3 {
     margin-bottom: 0.5rem;
 }
