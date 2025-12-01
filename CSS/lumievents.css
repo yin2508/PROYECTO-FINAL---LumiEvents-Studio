@@ -30,6 +30,7 @@ h1, h2, h3 {
     margin-top: 0.5rem;
     margin-bottom: 2rem;
     color: #6b7280;
+    text-align: center;
 }
 
 /* Botones */
@@ -96,7 +97,13 @@ h1, h2, h3 {
     width: 48px;
     height: 48px;
     border-radius: 999px;
-    background-color: #fbbf24;
+    border-radius: 999px;/*sirve para hacer circulos*/
+    background-image: url("/IMAGENES/logoLumi.png"); 
+    background-size: cover; /* ajusta la imagen al contenedor */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* elimina o cambia el color de fondo */
+    background-color: transparent;
 }
 
 /* Brayand: El texto del logo combina normal con bold para resaltar "Studio". */
@@ -111,7 +118,7 @@ h1, h2, h3 {
     gap: 1.5rem;
     list-style: none;
 }
-
+/*lo use porque no me dejaba poner el color en el a*/
 .main-nav a {
     text-decoration: none;
     color: #374151;
@@ -120,6 +127,7 @@ h1, h2, h3 {
 
 .main-nav a:hover {
     color: #c89a2b;
+    transition: 0.2s color ease;
 }
 
 /* Menú hamburguesa (para móvil) */
@@ -185,7 +193,7 @@ h1, h2, h3 {
    ======================= */
 
 .intro-section {
-    padding: 3rem 0 1rem 0;
+    padding: 1.5rem 0 1.5rem 0;
 }
 
 .intro-section h2 {
@@ -196,6 +204,7 @@ h1, h2, h3 {
 .intro-section p {
     max-width: 700px;
     color: #4b5563;
+    margin-bottom: 0.75rem;
 }
 
 /* =======================
@@ -214,6 +223,7 @@ h1, h2, h3 {
 
 .services-grid {
     margin-top: 2rem;
+    margin-bottom: 1rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
@@ -224,13 +234,18 @@ h1, h2, h3 {
     display: flex;
     gap: 1rem;
     padding: 1.25rem;
-    background-color: #f9fafb;
+    background-color: #f3f4f5;
     border-radius: 0.5rem;
+    box-shadow: 0 15px 15px 5px rgba(15, 23, 42, 0.08);
     border-left: 4px solid #c89a2b;
 }
 
 .icono {
     flex-shrink: 0;
+}
+
+.icono-unicode {
+    font-size: 200%;
 }
 
 /* Diego: El placeholder mantiene tamaño para que al poner el ícono real no se mueva nada. */
@@ -265,9 +280,7 @@ h1, h2, h3 {
     text-align: center;
 }
 
-/*prueba*/
 .portfolio-grid {
-    background-image: url("/IMAGENES/boda.jpeg");
     margin-top: 2rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -285,16 +298,24 @@ h1, h2, h3 {
 }
 
 .portfolio-image-placeholder {
-    /* AQUI FALTA IMAGEN DEL PORTAFOLIO */
     height: 190px;
     background-color: #e5e7eb;
     background-size: cover;
     background-position: center;
 }
 
+.portfolio-image-placeholder.boda {
+    background-image: url("/IMAGENES/boda.jpeg");
+}
+.portfolio-image-placeholder.conversatorio {
+    background-image: url("/IMAGENES/conversatorio.jpeg");
+}
+.portfolio-image-placeholder.corporativo {
+    background-image: url("/IMAGENES/corporativo.jpeg");
+}
 .portfolio-item h3 {
-    margin-top: 0.75rem;
-    font-size: 0.95rem;
+     margin-top: 0.75rem;
+      font-size: 0.95rem;
 }
 
 /* =======================
@@ -320,10 +341,13 @@ h1, h2, h3 {
 
 /* Diego: Placeholder del retrato de la emprendedora. */
 .about-image-placeholder {
-    /* AQUI FALTA IMAGEN DE LA EMPRENDEDORA O EQUIPO */
+    background-image: url("/IMAGENES/team.jpg");
     height: 260px;
     border-radius: 1rem;
     background-color: #e5e7eb;
+    background-size: cover;        /* SE ADAPTA AL CUADRO SIN DEFORMARSE */
+    background-position: center;   /* SE CENTRA */
+    background-repeat: no-repeat;  /* NO SE REPITE */
 }
 
 /* =======================
@@ -402,8 +426,24 @@ input:focus, textarea:focus {
     box-shadow: 0 0 0 1px rgba(200,154,43,0.4);
 }
 
+/*Diego: Ajustes adicionales a la sección de contacto directo, para que los espaciados se vean más naturales.*/
+.contact-us {
+    line-height: 200%;
+}
+
+#contact-form {
+ padding-top: 5px;
+}
+
 .contact-whatsapp h3 {
     margin-bottom: 0.5rem;
+}
+
+.contact-item {
+    padding-top: 10px;
+    padding-right: 2px;
+    width: 50px;
+    height: auto;
 }
 
 /* =======================
@@ -415,6 +455,7 @@ input:focus, textarea:focus {
     background-color: #111827;
     color: #e5e7eb;
     font-size: 0.85rem;
+    display: flex;
 }
 
 .footer-grid {
