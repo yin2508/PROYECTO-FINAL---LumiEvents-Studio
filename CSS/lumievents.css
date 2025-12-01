@@ -96,7 +96,13 @@ h1, h2, h3 {
     width: 48px;
     height: 48px;
     border-radius: 999px;
-    background-color: #fbbf24;
+    border-radius: 999px;/*sirve para hacer circulos*/
+    background-image: url("/IMAGENES/logoLumi.png"); 
+    background-size: cover; /* ajusta la imagen al contenedor */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* elimina o cambia el color de fondo */
+    background-color: transparent;
 }
 
 /* Brayand: El texto del logo combina normal con bold para resaltar "Studio". */
@@ -265,9 +271,7 @@ h1, h2, h3 {
     text-align: center;
 }
 
-/*prueba*/
 .portfolio-grid {
-    background-image: url("/IMAGENES/boda.jpeg");
     margin-top: 2rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -285,16 +289,24 @@ h1, h2, h3 {
 }
 
 .portfolio-image-placeholder {
-    /* AQUI FALTA IMAGEN DEL PORTAFOLIO */
     height: 190px;
     background-color: #e5e7eb;
     background-size: cover;
     background-position: center;
 }
 
+.portfolio-image-placeholder.boda {
+    background-image: url("/IMAGENES/boda.jpeg");
+}
+.portfolio-image-placeholder.conversatorio {
+    background-image: url("/IMAGENES/conversatorio.jpeg");
+}
+.portfolio-image-placeholder.corporativo {
+    background-image: url("/IMAGENES/corporativo.jpeg");
+}
 .portfolio-item h3 {
-    margin-top: 0.75rem;
-    font-size: 0.95rem;
+     margin-top: 0.75rem;
+      font-size: 0.95rem;
 }
 
 /* =======================
@@ -320,10 +332,13 @@ h1, h2, h3 {
 
 /* Diego: Placeholder del retrato de la emprendedora. */
 .about-image-placeholder {
-    /* AQUI FALTA IMAGEN DE LA EMPRENDEDORA O EQUIPO */
+    background-image: url("/IMAGENES/team.jpg");
     height: 260px;
     border-radius: 1rem;
     background-color: #e5e7eb;
+    background-size: cover;        /* SE ADAPTA AL CUADRO SIN DEFORMARSE */
+    background-position: center;   /* SE CENTRA */
+    background-repeat: no-repeat;  /* NO SE REPITE */
 }
 
 /* =======================
