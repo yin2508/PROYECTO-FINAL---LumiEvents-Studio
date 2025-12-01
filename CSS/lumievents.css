@@ -439,6 +439,13 @@ input:focus, textarea:focus {
     margin-bottom: 0.5rem;
 }
 
+.contact-item {
+    padding-top: 10px;
+    padding-right: 2px;
+    width: 50px;
+    height: auto;
+}
+
 /* =======================
    FOOTER
    ======================= */
