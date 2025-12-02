@@ -447,3 +447,70 @@ textarea:focus {
         display: flex;
     }
 }
+/* ====================================
+   ESTILO PÁGINA DE POLÍTICA DE PRIVACIDAD
+   ==================================== */
+
+/* Encabezado principal */
+.site-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.site-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1f2933;
+}
+
+/* Contenido principal */
+main.container {
+    padding: 2.5rem 0;
+}
+
+main.container section {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 18px rgba(15, 23, 42, 0.06);
+    line-height: 1.7rem;
+}
+
+main.container p {
+    margin-bottom: 1rem;
+    color: #4b5563;
+    font-size: 1rem;
+}
+
+/* Enlaces */
+main.container a {
+    color: #c89a2b;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+main.container a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.site-footer {
+    padding: 1.5rem 0;
+    background-color: #111827;
+    color: #e5e7eb;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    main.container section {
+        padding: 1.5rem;
+    }
+
+    .site-header h1 {
+        font-size: 1.5rem;
+    }
+}
