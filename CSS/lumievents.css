@@ -684,3 +684,63 @@ main.container a:hover {
         font-size: 1.5rem;
     }
 }
+
+
+/* ======================================
+   ORDEN CORRECTO EN LA MISMA CAJA
+   ====================================== */
+
+/* Caja principal organizada por GRID */
+.contact-us {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.10);
+
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr;
+    grid-template-areas:
+        "title title"
+        "desc desc"
+        "form whatsapp";
+    gap: 1.5rem;
+}
+
+/* Título */
+.contact-us h2 {
+    grid-area: title;
+}
+
+/* Descripción */
+.contact-us > p {
+    grid-area: desc;
+}
+
+/* Formulario */
+.contact-us form {
+    grid-area: form;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+}
+
+/* WhatsApp */
+.contact-us .contact-whatsapp {
+    grid-area: whatsapp;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+}
+
+/* Responsive: todo en 1 columna */
+@media (max-width: 900px) {
+    .contact-us {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "title"
+            "desc"
+            "form"
+            "whatsapp";
+    }
+    
+}
