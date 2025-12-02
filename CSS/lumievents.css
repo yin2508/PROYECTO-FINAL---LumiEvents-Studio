@@ -514,3 +514,25 @@ main.container a:hover {
         font-size: 1.5rem;
     }
 }
+/* --- Yineth: Alineación del checkbox y texto de políticas --- */
+.form-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px; /* separación visual */
+    vertical-align: middle;
+}
+
+.form-group label > input[type="checkbox"],
+.form-group input[type="checkbox"] + label {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Forzar que el texto quede en la misma línea */
+.form-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    white-space: nowrap;
+}
